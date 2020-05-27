@@ -10,13 +10,13 @@ page of our web app.
 
 INSTALATION:
 
-if you dont have python install it 
-install python flask (command: pip3 install flask)
-install python jsonify (command: pip3 install jsonify)
-install python request (command: pip3 install request)
-install python pymysql (command: pip3 install pymysql)
-install MySQL-server
-install javascript
+if you dont have python install it,
+install python flask (command: pip3 install flask),
+install python jsonify (command: pip3 install jsonify),
+install python request (command: pip3 install request),
+install python pymysql (command: pip3 install pymysql),
+install MySQL-server,
+install javascript.
 
 RUNNING:
 
