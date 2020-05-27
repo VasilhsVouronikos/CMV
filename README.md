@@ -21,7 +21,7 @@ install javascript
 RUNNING:
 
 Firstly create a database with the name mydb and then
-load the database through backup files into workbech.
+load the database tables through backup files located in buckup folder into workbech.
 When the database is ready open db_connector.py and change
 the password of the database with your's.So now everything
 is almost done,start the server by running server.py and open a 
