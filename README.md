@@ -1,4 +1,9 @@
 # Project_2020_MYE030-PLYE045
+CREATORS:
+Ioanna Kougia
+Padelhs Mhtshs
+Vasilis Vouronikos
+
 
 DESCRIPTION:
 
@@ -10,19 +15,34 @@ page of our web app.
 
 INSTALATION:
 
-if you dont have python install it,
-install python flask (command: pip3 install flask),
+------PYTHON MODULES------------
+In the env_setup folder you will find setup.py script,
+run it to automaticaly install the required python modules.
+If this dont work install the following modules by hand
+install python Flask (command: pip3 install Flask),
 install python jsonify (command: pip3 install jsonify),
 install python request (command: pip3 install request),
-install python pymysql (command: pip3 install pymysql),
-install MySQL-server,
+install python pymysql (command: pip3 install pip mysql-connector-python)
+
+------MySQL----------
+install MySQL-server
+install MySQL workbench
+
+------Javascript-------
 install javascript.
 
 RUNNING:
 
 Firstly create a database with the name mydb and then
-load the database tables through backup files located in buckup folder into workbech.
-When the database is ready open db_connector.py and change
-the password of the database with your's.So now everything
+load the database tables through backup files located in database_buckup folder into workbech.
+When the database is ready open credentials.txt located in Server-client folder
+and change your database credentials accordingly.So now everything
 is almost done,start the server by running server.py and open a 
 browser in the url 0.0.0.0/5000 and you are ready to go.
+
+
+DISPLAY DATABASE OUTPUT:
+
+The ouput of every query will be written
+in queries.txt show the user can see the 
+database output for every avaliable question
