@@ -44,5 +44,5 @@ browser in the url 0.0.0.0/5000 and you are ready to go.<br/>
 DISPLAY DATABASE OUTPUT:<br/>
 
 The ouput of every query will be written<br/>
-in queries.txt show the user can see the <br/>
+in queries.txt,so the user can see the <br/>
 database output for every avaliable question<br/>
