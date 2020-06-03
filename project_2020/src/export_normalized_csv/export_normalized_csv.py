@@ -3,11 +3,7 @@ import csv
 import time
 import re
 
-
-try:
-    directory = sys.argv[1]
-except:
-    directory = os.getcwd()+"/source_files/proscess_csv/test_cases/test_csv"
+directory = sys.argv[1]
 
 
 ################
