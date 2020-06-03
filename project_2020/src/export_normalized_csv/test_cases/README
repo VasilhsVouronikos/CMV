@@ -1,0 +1,6 @@
+----------------------------------  TEST FOR EXPORTING NORMALIZED CSV's-----------------------------------------
+
+In this test we have a folder with 2 csv files and we will use them to export
+a normalized version of them through the prosceess_data.py that we 
+created during the project.
+

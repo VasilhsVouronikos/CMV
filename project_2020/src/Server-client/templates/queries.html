@@ -1,0 +1,510 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+  <style>
+    .vertical-menu-countries {
+      width: 200px;
+      height: 150px;
+      overflow-y: auto;
+      text-align: right;
+    }
+	.vertical-menu-indicators{
+		width:400px;
+		height: 180px;
+		overflow-y: auto;
+      	text-align: right;
+	}
+  </style>
+</head>
+<body style = "background-color: #ebebe0">
+    <div class="text-center">
+        <h3>choose chart type</h3>
+        <button type="button" class="btn btn-dark" id = "scatter">Scatter plot</button>
+        <button type="button" class="btn btn-dark" id = "line">Line plot</button>
+        <button type="button" class="btn btn-dark" id = "bar">Bar chart</button>
+    </div>
+    <div class="text-center">
+	    <h3>Countries</h3>
+	    <div class=side>
+	      <div class="vertical-menu-countries btn btn-dark" id = "btnGroup">
+			<div href="#">Brazil  
+				<input type="checkbox" id = "Brazil">
+			</div>
+			<div href="#">Canada
+				<input type="checkbox" id = "Canada">
+			</div>
+			<div href="#">Switzerland
+				<input type="checkbox" id = "Switzerland">
+			</div>
+			<div href="#">Germany
+				<input type="checkbox" id = "Germany">
+			</div>
+			<div href="#">Egypt Arab Rep.
+				<input type="checkbox" id = "Egypt">
+			</div>
+			<div href="#">Greece
+				<input type="checkbox" id = "Greece">
+			</div>
+			<div href="#">India
+				<input type="checkbox" id = "India">
+			</div>
+			<div href="#">Japan
+				<input type="checkbox" id = "Japan">
+			</div>
+			<div href="#">Kenya
+				<input type="checkbox" id = "Kenya">
+			</div>
+			<div href="#">Russian Federation
+				<input type="checkbox" id = "Russia">
+			</div>
+			<div href="#">Tunisia
+				<input type="checkbox" id = "Tunisia">
+		  </div>
+	    </div>
+		     
+		<h3>Metrics</h3>
+		<div class=side>
+			<div class="vertical-menu-indicators btn btn-dark" id = "btnGroup">
+			<div href="#">Merchandise imports by the reporting economy  
+			  <input type="checkbox" id = "Merchandise_imports_by_the_reporting_economy">
+			</div>
+			<div href="#">Gross domestic savings
+			  <input type="checkbox" id = "Gross_domestic_savings">
+			</div>
+			<div href="#">Total natural resources rents
+			  <input type="checkbox" id = "Total_natural_resources_rents">
+			</div>
+			<div href="#">GDP per capita growth
+			  <input type="checkbox" id = "GDP_per_capita_growth">
+			</div>
+			<div href="#">Energy imports net
+			  <input type="checkbox" id = "Energy_imports_net">
+			</div>
+			<div href="#">GDP deflator
+			  <input type="checkbox" id = "GDP_deflator">
+			</div>
+			<div href="#">Exports as a capacity to import
+			  <input type="checkbox" id = "Exports_as_a_capacity_to_import">
+			</div>
+			<div href="#">Trade
+			  <input type="checkbox" id = "Trade">
+			</div>
+			<div href="#">Gross capital formation
+			  <input type="checkbox" id = "Gross_capital_formation">
+			</div>
+			<div href="#">Gross domestic savings
+			  <input type="checkbox" id = "Gross domestic savings">
+			</div>
+			<div href="#">Exports of goods and services
+			  <input type="checkbox" id = "Exports_of_goods_and_services">
+			</div>
+	    </div>                                         
+	    
+	</div>
+    <br> <br>
+    <div class="text-center">
+	    <form class="form-inline">
+	      <div>
+	        <h4> Choose Year</h4>
+	      </div>
+	      <div class="form-group mx-sm-3 mb-2">
+	        <label for="inputYear" class="sr-only">Year</label>
+	        <input type="year" class="form-control" id="inputYear" placeholder="Year">
+	      </div>
+	      <br>
+	      <input class="form-check-input" type="radio" name="exampleRadios" id="1_year" value="option1" checked>
+	      <label class="form-check-label" for="exampleRadios1">
+	        1 year period
+	      </label>
+	      &nbsp; &nbsp;
+	      <input class="form-check-input" type="radio" name="exampleRadios" id="5_year" value="option1" checked>
+	      <label class="form-check-label" for="exampleRadios1">
+	        5 year period
+	      </label>
+	      &nbsp; &nbsp;
+	      <input class="form-check-input" type="radio" name="exampleRadios" id="10_year" value="option1" checked>
+	      <label class="form-check-label" for="exampleRadios1">
+	        10 year period
+	      </label>
+	    </form>
+	</div>
+    <div class="text-center">
+      <button type="button" class="btn btn-dark" id = "query">Run Query</button>
+	</div>
+	<div id = "data_vis"></div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<script >
+		var checkbox_list = [];
+		var indicators = [];
+		var indicator;
+		var period = [];
+		var year ;
+		var plot = [];
+		var query_items = [];
+		var sql_output = []
+		//////////////////////////////////////
+		//checkbox fuctionality for indicators
+		/////////////////////////////////////
+		$('#Merchandise_imports_by_the_reporting_economy').on('change', function() {
+			var val;
+    		val = "Merchandise imports by the reporting economy";
+    		indicators.push(val);
+		});
+		$('#Gross_domestic_savings').on('change', function() {
+			var val;
+    		val = "Gross domestic savings";
+    		indicators.push(val);
+		});
+		$('#Total_natural_resources_rents').on('change', function() {
+			var val;
+    		val = "Total natural resources rents";
+    		indicators.push(val);
+		});
+		$('#GDP_per_capita_growth').on('change', function() {
+			var val;
+    		val = "GDP per capita growth";
+    		indicators.push(val);
+		});
+		$('#Energy_imports_net').on('change', function() {
+			var val;
+    		val = "Energy imports net";
+    		indicators.push(val);
+		});
+		$('#GDP_deflator').on('change', function() {
+			var val;
+    		val = "GDP deflator";
+    		indicators.push(val);
+		});
+		$('#Exports_as_a_capacity_to_import').on('change', function() {
+			var val;
+    		val = "Exports as a capacity to import";
+    		indicators.push(val);
+		});
+		$('#Trade').on('change', function() {
+			var val;
+    		val = "Trade";
+    		indicators.push(val);
+		});
+		$('#Gross_capital_formation').on('change', function() {
+			var val;
+    		val = "Gross capital formation";
+    		indicators.push(val);
+		});
+		$('#Gross_domestic_savings').on('change', function() {
+			var val;
+    		val = "Gross domestic savings";
+    		indicators.push(val);
+		});
+		$('#Exports_of_goods_and_services').on('change', function() {
+			var val;
+    		val = "Exports of goods and services";
+    		indicators.push(val);
+		});
+		//////////////////////////////////////
+		//checkbox functionality for countries
+		/////////////////////////////////////
+		$('#Brazil').on('change', function() {
+			var val;
+    		val = "Brazil";
+    		checkbox_list.push(val);
+		});
+		$('#Canada').on('change', function() {
+			var val;
+    		val = "Canada";
+    		checkbox_list.push(val);
+		});
+		$('#Switzerland').on('change', function() {
+			var val;
+    		val = "Switzerland";
+    		checkbox_list.push(val);
+		});
+		$('#Germany').on('change', function() {
+			var val;
+    		val = "Germany";
+    		checkbox_list.push(val);
+		});
+		$('#Greece').on('change', function() {
+			var val;
+    		val = "Greece";
+    		checkbox_list.push(val);
+		});
+		$('#Kenya').on('change', function() {
+			var val;
+    		val = "Kenya";
+    		checkbox_list.push(val);
+		});
+		$('#Japan').on('change', function() {
+			var val;
+    		val = "Japan";
+    		checkbox_list.push(val);
+		});
+		$('#Russia').on('change', function() {
+			var val;
+    		val = "Russia Federation";
+    		checkbox_list.push(val);
+		});
+		$('#Egypt').on('change', function() {
+			var val;
+    		val = "Egypt Arab Rep.";
+    		checkbox_list.push(val);
+		});
+		$('#Tunisia').on('change', function() {
+			var val;
+    		val = "Tunisia";
+    		checkbox_list.push(val);
+		});
+		$('#India').on('change', function() {
+			var val;
+    		val = "India";
+    		checkbox_list.push(val);
+		});
+		////////////////////////////////////////////
+		//buttons for plotting
+		///////////////////////////////////////////
+		$('#scatter').on('click', function(){
+			plot = [];
+			plot.push("scatter");
+		});
+		$('#line').on('click', function(){
+			plot = [];
+			plot.push("line");
+		});
+		$('#bar').on('click', function(){
+			plot = [];
+			plot.push("bar");
+		});
+		////////////////////////////////////////////
+		// period buttons
+		////////////////////////////////////////////
+		$('#1_year').on('click', function(){
+			period = [];
+			period.push("1");
+		});
+		$('#5_year').on('click', function(){
+			period = [];
+			period.push("5");
+		});
+		$('#10_year').on('click', function(){
+			period = [];
+			period.push("10");
+		});
+		///////////////////////////////////////////
+		//////////////////////////////////////////
+		////////////////////////////////////////////
+		// query button
+		///////////////////////////////////////////
+		$('#query').on('click', function(){
+			console.log("start query");
+			query_items.splice(0,query_items.length)
+
+			year = $('#inputYear').val();
+
+			if(checkbox_list.length > 0){
+				query_items.push(checkbox_list);
+			}
+			else{
+				alert("Choose some counties.");
+			}
+			if(indicators.length > 0){
+				query_items.push(indicators);
+			}
+			else{
+				alert("Choose indicators first.");
+			}
+			if( year == ''){
+        		alert('all years from 1960-2019 will be selected');
+        		//period.push("")
+        		//query_items.push(period);
+        		query_items.push(["All"])
+    		}
+    		else if(year > 2019 || year < 1960 ){
+    			alert('Error: year is invalid');
+    		}
+    		else{
+    			query_items.push([year]);
+    		}
+    		if(period.length == 0 && year!= ''){
+        		alert('Error: period is not checked');
+    		}
+    		else if(period.length == 0 && year == ''){
+    			period.push("no period");
+    			query_items.push(period);
+    		}
+    		else{
+    			query_items.push(period);
+    		}
+    		if(plot.length == 0){
+        		alert('Error: plot is not checked');
+        	}
+        	else{
+        		query_items.push(plot)
+        	}
+
+        	run_query();
+        	uncheck();
+        	
+
+		});
+		// communicate with server through ajax
+		function send_receive_data(){
+			var json_data = JSON.stringify(query_items)
+			$.ajax({
+				data : {
+					jsdata : json_data       	
+				},								
+				type : "POST",
+				url : "/get_rec",
+				dataType: 'json',
+				async: true,
+				success: function(response){ // success function takes the response from the server
+					result_array = response;
+					if(result_array.response == "no result"){
+						alert("No results found with given inputs");
+					}
+					else{
+						sql_output = result_array.response; // sql_output holds the database output
+						console.log(sql_output);
+						data = data_proscess(sql_output,query_items);
+						create_graph(data);
+					}
+				}
+			})
+		}
+		// clear checkboxes of client 
+		function uncheck(){
+			$(":checkbox").prop('checked', false).parent().removeClass('active');
+			$(":radio").prop('checked', false).parent().removeClass('active');
+		}
+		function clear(){
+			indicators.splice(0,indicators.length);
+    		checkbox_list.splice(0,checkbox_list.length);
+    		period.splice(0,period.length);
+		}
+		function test_comunication(){
+			var test = "hello from web page";
+			$.ajax({
+				data : {
+					jsdata : test       	
+				},      						// when it comes for testing communication
+												// just run this test instead of function send_receive_data()
+				type : "POST",
+				url : "/get_rec",
+				dataType: 'json',
+				async: false,
+				success: function(response){ 	// success function takes the response from the server
+					console.log(response);
+				}
+			})
+		}
+		function run_query(){
+			console.log(indicators.length,checkbox_list.length,period.length)
+			if(query_items.length == 0){
+        		// test_communication is only for testing that server and client exchange massages in the right order
+        		// if client dont check anything test will be excecuted
+        		test_comunication();
+        	}
+        	if(query_items.length >= 4){
+        		// when oparating normally send_receive_data will be called
+        		send_receive_data(); 
+    			clear();
+
+        	}
+    		//console.log(query_items);
+		}
+		function create_graph(g_data){
+			var margin = {top :100,right : 50,bottom :50,left : 50},
+				width = 700 - margin.left - margin.right,
+				height = 700 - margin.top - margin.bottom;
+
+
+			var parseDate = d3.timeFormat("%Y");
+
+			var data = g_data.map(function(d){
+
+				return {
+					date : new Date(d[0].toString()),
+					value : d[1]
+				};
+			});
+
+			var svg = d3.select("#data_vis")
+			.append("svg")
+				.attr("width",width + margin.left + margin.right)
+				.attr("height",height + margin.top + margin.bottom)
+			.append("g")
+				.attr("tranform","translate(" + margin.left + "," + margin.top + ")");
+
+			var x = d3.scaleTime()
+				.domain(d3.extent(data,function(d){return d.date;}))
+				.range([0,width]);
+			svg.append("g")
+				.attr("tranform","translate(0," + height + ")")
+				.call(d3.axisBottom(x));
+
+
+			var y = d3.scaleLinear()
+				.domain([0,d3.max(data,function(d){return +d.value;})])
+				.range([height,0]);
+			svg.append("g")
+				.call(d3.axisLeft(y));
+
+
+
+			svg.append("path")
+			.datum(data)
+			.attr("fill","none")
+			.attr("stroke","steelblue")
+			.attr("stroke-width",1.5).
+			attr("d",d3.line()
+				.x(function(d){return x(d.date)})
+				.y(function(d){return y(d.value)})
+				)
+
+
+		}
+		// this function gets rid of data that are not usable like number -1
+		function data_proscess(data,query_list){
+			graph_data = [];
+			plot = query_list[query_list.length - 1]
+			if(plot[0] == "line" || plot[0] == "bar"){
+				for(var i = 0; i < data.length; i++){
+					array = data[i];
+					year = array[0];
+					val = array[1];
+					if(val == -1){
+						continue;
+					}
+					else{
+						graph_line = [year,val];
+						graph_data.push(graph_line);
+					}
+					
+
+				}
+			}
+			if(plot[0] == "scatter"){
+				for(var i = 0; i < data.length; i++){
+					array = data[i];
+					year = array[0];
+					val = array[1];
+					if(val == -1){
+						continue;
+					}
+					else{
+						graph_line = [year,val];
+						graph_data.push(graph_line);
+					}
+					
+
+				}
+			}
+			//console.log(graph_data);
+			return graph_data;
+		}
+	</script>
+</body>
+
+{% endblock content %}
+

@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+<div class="text-center">
+	<h1 class="display-4">Welcome to</h1>
+</div>
+<blockquote class="blockquote text-center">
+	<p class="mb-0">Εφαρμογή στα Προχωρημένα Θέματα Τεχνολογίας και Εφαρμογών Βάσεων Δεδομένων 2020</p>
+</blockquote>
+<h5> Μία σύντομη περιγραφή</h5>
+<p class="lead">
+	Στα πλαίσια του μαθήματος Προχωρημένα Θέματα Τεχνολογίας και Εφαρμογών Βάσεων Δεδομένων
+	αναπτύξαμε μια εφαρμογή οπτικοποίησης δεδομένων που αφορούν χώρες και χρονολογίες
+	σχετικά με 12 δείκτες που θα αναφέρουμε παρακάτω.Ο χρήστης θα είναι σε θέση να
+	επιλέξη διάφορους συνδιασμούς των παραπάνω και να αντλήσει μεσο της οπτικοποίησης
+	του αποτελέσματος διάφορα συμπεράσματα.Επίσης η μέθοδος οπτικοποίησης του αποτελέσματος
+	μπορεί να επιλεχθεί χωρίς κάποιον περιορισμό.
+</p>
+<h5>Eπιλογές οπτικοποιησης</h5>
+<ul>
+  <li>Scatter plot</li>
+  <li>Line plot</li>
+  <li>Bar chart</li>
+  <li>many more...</li>
+</ul>
+<h5>Περιγραφή βάσης,απο τι απολείται;</h5>
+	<ul>
+  <li>12 χώρες.</li>
+  <li>12 δείκτες.</li>
+  <li>Δεδομένα μεταξυ χρονολογιών-δεικτών για κάθε χώρα.</li>
+  <li>Δεδομένα χρονολογιών(σε ποια πενταετία και δεκαετία ανήκει η καθεμία).</li>
+</ul>
+<div class="text-center">
+	<h4 class="display-5">Δείκτες που χρησιμοποιήθηκαν</h4>
+</div>
+<div class="text-center">
+	<p>Ακολουθεί ενας πίνακας με τους δείκτες που χρησιμοποιήθηκαν</p>
+</div>
+<table class="table table-striped table-bordered table-dark">
+  <thead class="thead-light">
+    <tr>
+			<th scope="col">αναγνωριστικό</th>
+      <th scope="col">Ονομα δείκτη</th>
+      <th scope="col">Κωδικός δείκτη</th>
+    </tr>
+  </thead>
+	<tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Merchandise exports by the reporting economy</td>
+      <td>TX.VAL.MRCH.WL.CD</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Merchandise imports by the reporting economy</td>
+      <td>TM.VAL.MRCH.WL.CD</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Merchandise trade </td>
+      <td>TG.VAL.TOTL.GD.ZS</td>
+    </tr>
+		 <tr>
+      <th scope="row">4</th>
+      <td>Gross domestic savings</td>
+      <td>NY.GDS.TOTL.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Total natural resources rents</td>
+      <td>NY.GDP.TOTL.RT.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>GDP per capita growth</td>
+      <td>NY.GDP.PCAP.KD.ZG</td>
+    </tr>
+		 <tr>
+      <th scope="row">7</th>
+      <td>Energy imports net</td>
+      <td>EG.IMP.CONS.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>GDP deflator</td>
+      <td>NY.GDP.DEFL.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Exports as a capacity to import</td>
+      <td>NY.EXP.CAPM.KN</td>
+    </tr>
+		 <tr>
+      <th scope="row">10</th>
+      <td>Trade</td>
+      <td>NE.TRD.GNFS.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>Gross capital formation</td>
+      <td>NE.GDI.TOTL.ZS</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>Exports of goods and services </td>
+      <td>NE.EXP.GNFS.ZS</td>
+    </tr>
+  </tbody>
+</table>
+<div class="text-center">
+	<h4 class="display-5">Χώρες που χρησιμοποιήθηκαν</h4>
+</div>
+<div class="text-center">
+	<p>Ακολουθεί ενας πίνακας με τις χώρες που χρησιμοποιήθηκαν</p>
+</div>
+<table class="table table-striped table-bordered table-dark">
+  <thead class="thead-light">
+    <tr>
+			<th scope="col">αναγνωριστικό</th>
+      <th scope="col">Ονομα χώρας</th>
+      <th scope="col">Κωδικός χώρας</th>
+    </tr>
+  </thead>
+	<tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Brazil</td>
+      <td>BRA</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Canada</td>
+      <td>CAN</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Switzerland</td>
+      <td>CHE</td>
+    </tr>
+		 <tr>
+      <th scope="row">4</th>
+      <td>Germany</td>
+      <td>DEU</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>Egypt Arab Rep</td>
+      <td>EGY</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>Greece</td>
+      <td>GRC</td>
+    </tr>
+		 <tr>
+      <th scope="row">7</th>
+      <td>India</td>
+      <td>IND</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>Japan</td>
+      <td>JPN</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>Kenya</td>
+      <td>KEN</td>
+    </tr>
+		 <tr>
+      <th scope="row">10</th>
+      <td>Mexico</td>
+      <td>MEX</td>
+    </tr>
+    <tr>
+      <th scope="row">11</th>
+      <td>Russian Federation</td>
+      <td>RUS</td>
+    </tr>
+    <tr>
+      <th scope="row">12</th>
+      <td>Tunisia</td>
+      <td>TUN</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}
+

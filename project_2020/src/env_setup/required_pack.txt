@@ -1,0 +1,4 @@
+pack1=Flask
+pack2=jsonify
+pack3=request
+pack4=mysql-connector-python
